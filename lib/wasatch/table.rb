@@ -1,5 +1,5 @@
 require_relative "station"
-require_relative "secrets"
+require_relative "../../bin/secrets"
 require "nokogiri"
 require "open-uri"
 require "nexmo"

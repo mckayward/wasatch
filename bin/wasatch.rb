@@ -1,4 +1,4 @@
-require_relative "table"
+require_relative "../lib/wasatch/table"
 require "nexmo"
 require_relative "secrets"
 
