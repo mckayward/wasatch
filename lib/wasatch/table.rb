@@ -9,13 +9,12 @@ class Table
   attr_reader :table, :message
   attr_accessor :stations, :numbers
 
-  def initialize
-    @site_url = "http://results.wasatch100.com/Runner/Details/221"
+  def initialize(runner)
+    @runner   = runner 
+    @site_url = "http://results.wasatch100.com/Runner/Details/#{@runner_number}"
     @page     = Nokogiri::HTML(open(@site_url))
     @table    = @page.css('table.runnerprogress > tbody > tr')
     @stations = new_stations
-    @numbers  = ['12088919816', '12088417866',
-                 '15012607324','18015124125']
   end
 
   def new_stations
@@ -28,7 +27,7 @@ class Table
 
   def message(station)
     "RACE UPDATE:\n"\
-    "Jordan arrived at #{station.name} "\
+    "#{@runner.name} arrived at #{station.name} "\
     "(mile #{station.mile.to_f}) at #{station.in} "\
     "#{"and left at #{station.out}." if station.out != ''}"\
     "\nRoughly #{100 - station.mile.to_i} miles to go."
@@ -49,7 +48,7 @@ class Table
   end
 
   def send_texts(station)
-    @numbers.each do |number|
+    @runner.numbers.each do |number|
       nexmo = Nexmo::Client.new(key: SECRETS[0], secret: SECRETS[1])
       nexmo.send_message(from: '19893108084', to: number, text: message(station))
       sleep(1)
