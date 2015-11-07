@@ -1,9 +1,10 @@
 class Station
+
   attr_reader :name, :mile, :elevation
   attr_accessor :in, :out
 
   def initialize(row)
-    @name       = row[0].text 
+    @name       = row[0].text
     @mile       = row[1].text
     @elevation  = row[2].text
     @in         = row[3].text
@@ -11,7 +12,7 @@ class Station
   end
 
   def ==(otherstation)
-    @in == otherstation.in && @out == otherstation.out 
+    @in == otherstation.in && @out == otherstation.out
   end
 
   def to_s

@@ -10,7 +10,7 @@ class Table
   attr_accessor :stations, :numbers
 
   def initialize(runner)
-    @runner   = runner 
+    @runner   = runner
     @site_url = "http://results.wasatch100.com/Runner/Details/#{@runner_number}"
     @page     = Nokogiri::HTML(open(@site_url))
     @table    = @page.css('table.runnerprogress > tbody > tr')
@@ -32,7 +32,7 @@ class Table
     "#{"and left at #{station.out}." if station.out != ''}"\
     "\nRoughly #{100 - station.mile.to_i} miles to go."
   end
-  
+
   def ==(othertable)
     @stations == othertable.stations
   end

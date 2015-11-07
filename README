@@ -1,5 +1,5 @@
 This code monitors the results.wasatch100.com webpage for a given runner
-and sends a text message to specified numbers when the runner reaches a 
+and sends a text message to specified numbers when the runner reaches a
 new an aid station.
 
 The results.wasatch100.com webpage is taken down until just before race day,
