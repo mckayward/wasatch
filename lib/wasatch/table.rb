@@ -1,5 +1,4 @@
 require_relative "station"
-require_relative "../../bin/secrets"
 require "nokogiri"
 require "open-uri"
 require "nexmo"
@@ -49,8 +48,8 @@ class Table
 
   def send_texts(station)
     @runner.numbers.each do |number|
-      nexmo = Nexmo::Client.new(key: SECRETS[0], secret: SECRETS[1])
-      nexmo.send_message(from: '19893108084', to: number, text: message(station))
+      nexmo = Nexmo::Client.new(key: ENV['NEXMO_API_KEY'], secret: ENV['NEXMO_API_SECRET'])
+      nexmo.send_message(from: ENV['NEXMO_NUMBER'], to: number, text: message(station))
       sleep(1)
     end
   end
